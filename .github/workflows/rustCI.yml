@@ -1,0 +1,74 @@
+name: Rust CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          components: clippy, rustfmt
+          override: true
+          
+      - name: Update Linux
+        run: sudo apt update
+        
+      - name: Update Rust
+        run: make install
+        
+      - name: Check Rust Versions
+        run: make rust-version
+        
+      - name: Build Rust
+        run: make release
+        
+      - name: Format Code
+        run: make format
+        
+      - name: Lint Code
+        run: make lint
+        
+      - name: Extract Data
+        run: make extract
+        
+      - name: Transform and Load Data
+        run: make transform_load
+        
+      - name: Create Data
+        run: make create
+        
+      - name: Read Data
+        run: make read
+        
+      - name: Update Data
+        run: make update
+        
+      - name: Delete Data
+        run: make delete
+        
+      - name: Run Tests
+        run: make test
+        
+      - name: Archive Binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: optimized-binary
+          path: target/release/tina_yi_sqlite
+          
+      - name: Pull Repository
+        run: git pull
+        
+      - name: Add Rust Logs
+        run: make generate_and_push

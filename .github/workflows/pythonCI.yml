@@ -1,0 +1,62 @@
+name: Python CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Sleep for 200 seconds
+        run: sleep 200
+
+      - name: Fetch and Reset Repository
+        run: git fetch && git reset --hard origin/main
+
+      - name: Pull Latest Changes
+        run: git pull
+
+      - name: Install Python Packages
+        run: make python_install
+
+      - name: Run Python Linter
+        run: make python_lint
+
+      - name: Execute Python Tests
+        run: make python_test
+
+      - name: Format Python Code
+        run: make python_format
+
+      - name: Extract Python Data
+        run: make python_extract
+
+      - name: Transform and Load Python Data
+        run: make python_transform_load
+
+      - name: Create Python Data
+        run: make python_create
+
+      - name: Read Python Data
+        run: make python_read
+
+      - name: Update Python Data
+        run: make python_update
+
+      - name: Delete Python Data
+        run: make python_delete
+
+      - name: Pull Repository Again
+        run: git pull
+
+      - name: Generate and Push Changes
+        run: make generate_and_push
+
+      - name: Deploy Python App
+        run: make python_deploy

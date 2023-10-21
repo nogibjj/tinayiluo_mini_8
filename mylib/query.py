@@ -3,7 +3,7 @@
 import sqlite3
 
 # Define a global variable for the log file
-LOG_FILE = "query_log.md"
+LOG_FILE = "python_query_log.md"
 
 
 def log_query(query):
@@ -35,7 +35,7 @@ def general_query(query):
     cursor.close()
     conn.close()
 
-    log_query(f"{query}")
+    # log_query(f"{query}")
 
 
 def create_record(

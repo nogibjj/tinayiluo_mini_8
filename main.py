@@ -1,6 +1,8 @@
 """handles cli commands"""
 import sys
 import argparse
+import time
+import psutil
 from mylib.extract import extract
 from mylib.transform_load import load
 from mylib.query import (
@@ -10,6 +12,15 @@ from mylib.query import (
     general_query,
     read_data,
 )
+
+LOG_FILE = "python_query_log.md"
+
+
+def log_query(query, times, mem_used):
+    """adds to a query markdown file"""
+    with open(LOG_FILE, "a") as file:
+        file.write(f"```sql\n{query}\n```\n\n")
+        file.write(f"the query took {times} microseconds and used {mem_used} kB\n")
 
 
 def handle_arguments(args):
@@ -62,6 +73,9 @@ def handle_arguments(args):
 
 def main():
     """handles all the cli commands"""
+    start_time = time.perf_counter()
+    memory_before = psutil.virtual_memory().used / (1024.0)
+
     args = handle_arguments(sys.argv[1:])
 
     if args.action == "extract":
@@ -98,6 +112,11 @@ def main():
         )
     elif args.action == "general_query":
         general_query(args.query)
+        end_time = time.perf_counter()
+        elapsed_time_micros = (end_time - start_time) * 1e6
+        memory_after = psutil.virtual_memory().used / (1024.0)
+        memory_used = memory_after - memory_before
+        log_query(args.query, elapsed_time_micros, memory_used)
     elif args.action == "read_data":
         data = read_data()
         print(data)
