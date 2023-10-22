@@ -7,7 +7,10 @@ use tina_yi_sqlite::{extract, query, transform_load};
 const LOG_FILE: &str = "rust_query_log.md"; // Define the LOG_FILE constant
 
 fn log_query(action: &str, times: u128, mem_used: u64) -> std::io::Result<()> {
-    let mut file = OpenOptions::new().append(true).create(true).open(LOG_FILE)?;
+    let mut file = OpenOptions::new()
+        .append(true)
+        .create(true)
+        .open(LOG_FILE)?;
 
     writeln!(file, "```action\n{}\n```\n", action)?;
     writeln!(
