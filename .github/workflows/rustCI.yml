@@ -40,9 +40,6 @@ jobs:
       - name: Lint Code
         run: make lint
         
-      - name: Extract Data
-        run: make extract
-        
       # - name: Transform and Load Data
       #   run: make transform_load
         
@@ -60,6 +57,9 @@ jobs:
         
       - name: Run Tests
         run: make test
+        
+      - name: Extract Data
+        run: make extract
         
       - name: Archive Binary
         uses: actions/upload-artifact@v2
