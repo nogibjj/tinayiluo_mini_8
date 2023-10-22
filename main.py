@@ -22,7 +22,8 @@ def log_query(action, times, mem_used):
     with open(LOG_FILE, "a") as file:
         file.write(f"```action\n{action}\n```\n\n")
         file.write(
-            f"The {action} action took {times} microseconds and used {mem_used} kB in Python.\n"
+            f"The {action} action took {times} microseconds in Python.\n"
+            f"The {action} action used {mem_used} kB in Python.\n"
         )
 
 
