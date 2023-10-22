@@ -21,7 +21,9 @@ def log_query(action, times, mem_used):
     """adds to a query markdown file"""
     with open(LOG_FILE, "a") as file:
         file.write(f"```action\n{action}\n```\n\n")
-        file.write(f"the {action} took {times} microseconds and used {mem_used} kB\n")
+        file.write(
+            f"The {action} action took {times} microseconds and used {mem_used} kB in Python.\n"
+        )
 
 
 def handle_arguments(args):

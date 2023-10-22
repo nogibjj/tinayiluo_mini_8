@@ -12,7 +12,7 @@ fn log_query(action: &str, times: u128, mem_used: u64) -> std::io::Result<()> {
     writeln!(file, "```action\n{}\n```\n", action)?;
     writeln!(
         file,
-        "the {} took {} microseconds and used {} kB\n",
+        "The {} action took {} microseconds and used {} kB in Rust.\n",
         action, times, mem_used
     )?;
 

@@ -1,20 +1,20 @@
 use reqwest::blocking::Client;
 use rusqlite::{params, Connection, Result};
 use std::fs;
-use std::fs::OpenOptions;
-use std::io::Write;
+// use std::fs::OpenOptions;
+// use std::io::Write;
 
-const LOG_FILE: &str = "rust_query_log.md";
+// const LOG_FILE: &str = "rust_query_log.md";
 
-fn log_query(query: &str, log_file: &str) {
-    if let Ok(mut file) = OpenOptions::new().append(true).create(true).open(log_file) {
-        if let Err(err) = writeln!(file, "```sql\n{}\n```\n", query) {
-            eprintln!("Error writing to log file: {:?}", err);
-        }
-    } else {
-        eprintln!("Error opening log file for writing.");
-    }
-}
+// fn log_query(query: &str, log_file: &str) {
+//     if let Ok(mut file) = OpenOptions::new().append(true).create(true).open(log_file) {
+//         if let Err(err) = writeln!(file, "```sql\n{}\n```\n", query) {
+//             eprintln!("Error writing to log file: {:?}", err);
+//         }
+//     } else {
+//         eprintln!("Error opening log file for writing.");
+//     }
+// }
 
 pub fn extract(url: &str, file_path: &str, directory: &str) {
     if !fs::metadata(directory).is_ok() {
@@ -127,6 +127,6 @@ pub fn query(query: &str) -> Result<()> {
         // other CUD operations
         let _num_affected_rows = conn.execute_batch(query)?;
     }
-    log_query(query, LOG_FILE);
+    // log_query(query, LOG_FILE);
     Ok(())
 }

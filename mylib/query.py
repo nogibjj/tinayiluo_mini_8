@@ -6,10 +6,10 @@ import sqlite3
 LOG_FILE = "python_query_log.md"
 
 
-def log_query(query):
-    """adds to a query markdown file"""
-    with open(LOG_FILE, "a") as file:
-        file.write(f"```sql\n{query}\n```\n\n")
+# def log_query(query):
+#     """adds to a query markdown file"""
+#     with open(LOG_FILE, "a") as file:
+#         file.write(f"```sql\n{query}\n```\n\n")
 
 
 def general_query(query):
@@ -79,17 +79,17 @@ def create_record(
     conn.close()
 
     # Log the query
-    log_query(
-        f"""INSERT INTO AirlineSafetyDB VALUES (
-            {airline}, 
-            {avail_seat_km_per_week},
-            {incidents_85_99}, 
-            {fatal_accidents_85_99}, 
-            {fatalities_85_99}, 
-            {incidents_00_14}, 
-            {fatal_accidents_00_14}, 
-            {fatalities_00_14});"""
-    )
+    # log_query(
+    #     f"""INSERT INTO AirlineSafetyDB VALUES (
+    #         {airline},
+    #         {avail_seat_km_per_week},
+    #         {incidents_85_99},
+    #         {fatal_accidents_85_99},
+    #         {fatalities_85_99},
+    #         {incidents_00_14},
+    #         {fatal_accidents_00_14},
+    #         {fatalities_00_14});"""
+    # )
 
 
 def update_record(
@@ -149,19 +149,19 @@ def update_record(
     conn.close()
 
     # Log the query
-    log_query(
-        f"""UPDATE AirlineSafetyDB SET 
-        airline={airline}, 
-        avail_seat_km_per_week={avail_seat_km_per_week},
-        incidents_85_99=
-        {incidents_85_99},
-        fatal_accidents_85_99={fatal_accidents_85_99}, 
-        fatalities_85_99={fatalities_85_99}, 
-        incidents_00_14={incidents_00_14}, 
-        fatal_accidents_00_14={fatal_accidents_00_14}, 
-        fatalities_00_14={fatalities_00_14} 
-        WHERE id={record_id};"""
-    )
+    # log_query(
+    #     f"""UPDATE AirlineSafetyDB SET
+    #     airline={airline},
+    #     avail_seat_km_per_week={avail_seat_km_per_week},
+    #     incidents_85_99=
+    #     {incidents_85_99},
+    #     fatal_accidents_85_99={fatal_accidents_85_99},
+    #     fatalities_85_99={fatalities_85_99},
+    #     incidents_00_14={incidents_00_14},
+    #     fatal_accidents_00_14={fatal_accidents_00_14},
+    #     fatalities_00_14={fatalities_00_14}
+    #     WHERE id={record_id};"""
+    # )
 
 
 def delete_record(record_id):
@@ -173,7 +173,7 @@ def delete_record(record_id):
     conn.close()
 
     # Log the query
-    log_query(f"DELETE FROM AirlineSafetyDB WHERE id={record_id};")
+    # log_query(f"DELETE FROM AirlineSafetyDB WHERE id={record_id};")
 
 
 def read_data():
@@ -182,5 +182,5 @@ def read_data():
     c = conn.cursor()
     c.execute("SELECT * FROM AirlineSafetyDB")
     data = c.fetchall()
-    log_query("SELECT * FROM AirlineSafetyDB;")
+    # log_query("SELECT * FROM AirlineSafetyDB;")
     return data
