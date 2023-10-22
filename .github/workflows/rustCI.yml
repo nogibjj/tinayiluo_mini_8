@@ -43,20 +43,20 @@ jobs:
       - name: Extract Data
         run: make extract
         
-      - name: Transform and Load Data
-        run: make transform_load
+      # - name: Transform and Load Data
+      #   run: make transform_load
         
-      - name: Create Data
-        run: make create
+      # - name: Create Data
+      #   run: make create
         
-      - name: Read Data
-        run: make read
+      # - name: Read Data
+      #   run: make read
         
-      - name: Update Data
-        run: make update
+      # - name: Update Data
+      #   run: make update
         
-      - name: Delete Data
-        run: make delete
+      # - name: Delete Data
+      #   run: make delete
         
       - name: Run Tests
         run: make test

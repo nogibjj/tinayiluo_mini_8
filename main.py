@@ -89,7 +89,7 @@ def main():
         elapsed_time_micros = (end_time - start_time) * 1e6
         memory_after = psutil.Process(os.getpid()).memory_info().rss / 1024
         memory_used = memory_after - memory_before
-        # print(memory_used)
+        print(memory_used)
 
         log_query(
             args.action,
