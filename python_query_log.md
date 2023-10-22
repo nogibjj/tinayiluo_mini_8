@@ -106,3 +106,42 @@ the query took 1136.8750128895044 microseconds and used 48.0 kB
 SELECT * FROM AirlineSafetyDB;
 ```
 
+```sql
+UPDATE AirlineSafetyDB SET 
+        airline=Alaska Airlines, 
+        avail_seat_km_per_week=965346773,
+        incidents_85_99=
+        1,
+        fatal_accidents_85_99=0, 
+        fatalities_85_99=0, 
+        incidents_00_14=0, 
+        fatal_accidents_00_14=0, 
+        fatalities_00_14=1 
+        WHERE id=9;
+```
+
+```sql
+DELETE FROM AirlineSafetyDB WHERE id=1;
+```
+
+```sql
+INSERT INTO AirlineSafetyDB VALUES (
+            China's Airline, 
+            965346772,
+            1, 
+            0, 
+            0, 
+            0, 
+            0, 
+            1);
+```
+
+```sql
+SELECT * FROM AirlineSafetyDB WHERE airline = 'Alaska Airlines'
+```
+
+the query took 1215.917058289051 microseconds and used 0.0 kB
+```sql
+SELECT * FROM AirlineSafetyDB;
+```
+
