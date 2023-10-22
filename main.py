@@ -1,5 +1,6 @@
 """handles cli commands"""
 import sys
+import os
 import argparse
 import time
 import psutil
@@ -74,7 +75,7 @@ def handle_arguments(args):
 def main():
     """handles all the cli commands"""
     start_time = time.perf_counter()
-    memory_before = psutil.virtual_memory().used / (1024.0)
+    memory_before = psutil.Process(os.getpid()).memory_info().rss / 1024
 
     args = handle_arguments(sys.argv[1:])
 
@@ -114,9 +115,15 @@ def main():
         general_query(args.query)
         end_time = time.perf_counter()
         elapsed_time_micros = (end_time - start_time) * 1e6
-        memory_after = psutil.virtual_memory().used / (1024.0)
+        memory_after = psutil.Process(os.getpid()).memory_info().rss / 1024
         memory_used = memory_after - memory_before
-        log_query(args.query, elapsed_time_micros, memory_used)
+        # print(memory_used)
+
+        log_query(
+            args.query,
+            elapsed_time_micros,
+            memory_used,
+        )
     elif args.action == "read_data":
         data = read_data()
         print(data)
