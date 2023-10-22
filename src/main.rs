@@ -6,14 +6,14 @@ use tina_yi_sqlite::{extract, query, transform_load};
 
 const LOG_FILE: &str = "rust_query_log.md"; // Define the LOG_FILE constant
 
-fn log_query(query: &str, times: u128, mem_used: u64) -> std::io::Result<()> {
-    let mut file = OpenOptions::new().append(true).open(LOG_FILE)?;
+fn log_query(action: &str, times: u128, mem_used: u64) -> std::io::Result<()> {
+    let mut file = OpenOptions::new().append(true).create(true).open(LOG_FILE)?;
 
-    writeln!(file, "```sql\n{}\n```\n", query)?;
+    writeln!(file, "```action\n{}\n```\n", action)?;
     writeln!(
         file,
-        "the query took {} microseconds and used {} kB\n",
-        times, mem_used
+        "the {} took {} microseconds and used {} kB\n",
+        action, times, mem_used
     )?;
 
     Ok(())
@@ -39,6 +39,16 @@ fn main() {
                 "data/airline-safety.csv",
                 "data",
             );
+            let end_time = Instant::now();
+            let elapsed_time = end_time.duration_since(start_time);
+            let mem_info_after = sys_info::mem_info().unwrap();
+            let mem_used = mem_info_after.total - mem_info_before.total;
+
+            match log_query(action.as_str(), elapsed_time.as_micros(), mem_used) {
+                // Removed borrowing
+                Ok(_) => {}
+                Err(e) => println!("Error: {:?}", e),
+            }
         }
         "transform_load" => match transform_load("data/airline-safety.csv") {
             Ok(_) => println!("Data loaded successfully!"),
@@ -50,16 +60,6 @@ fn main() {
                     eprintln!("Error: {:?}", err);
                 } else {
                     println!("Query executed successfully!");
-                    let end_time = Instant::now();
-                    let elapsed_time = end_time.duration_since(start_time);
-                    let mem_info_after = sys_info::mem_info().unwrap();
-                    let mem_used = mem_info_after.total - mem_info_before.total;
-
-                    match log_query(q, elapsed_time.as_micros(), mem_used) {
-                        // Removed borrowing
-                        Ok(_) => {}
-                        Err(e) => println!("Error: {:?}", e),
-                    }
                 }
             } else {
                 println!("Usage: {} query [SQL query]", args[0]);
