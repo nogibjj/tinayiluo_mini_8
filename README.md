@@ -3,7 +3,7 @@
 
 [![Rust CI/CD Pipeline](https://github.com/nogibjj/tinayiluo_mini_8/actions/workflows/rustCI.yml/badge.svg)](https://github.com/nogibjj/tinayiluo_mini_8/actions/workflows/rustCI.yml)
 
-Mini project 8
+Mini project 8: Rewrite a Python Script in Rust
 
 ### Architectural Diagram
 
