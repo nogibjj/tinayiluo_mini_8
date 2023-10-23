@@ -34,8 +34,8 @@ jobs:
       - name: Format Python Code
         run: make python_format
 
-      - name: Extract Python Data
-        run: make python_extract
+      # - name: Extract Python Data
+        # run: make python_extract
 
       # - name: Transform and Load Python Data
         # run: make python_transform_load
