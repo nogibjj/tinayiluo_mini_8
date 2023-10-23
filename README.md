@@ -14,7 +14,7 @@ Mini project 8
 This project delivers a comprehensive Data Extraction, Transformation, Loading (ETL) tool, alongside Querying (CRUD) capabilities, developed using Python and Rust each. The process entails taking an existing Python script for ETL-Query and rewrite it in rust using Github Copilot. The project highlights improvements in speed and resource usage after switching Python to Rust. 
 
 This toolkit offers a suite of functions for ETL operations on datasets, facilitating queries on a SQLite database. It comprehensively covers CRUD (Create, Read, Update, Delete) operations, logging all queries to two Markdown file, `python_query_log.md` and `rust_query_log.md`, to aid in the tracking and analysis of executed commands and comparing the speed and resource usage for Python and Rust on the `Extract` operation. 
-.
+
 The operational workflow includes running a Makefile to perform tasks such as installation (`make install`), testing (`make test`), code formatting (`make format`) with Python Black, linting (`make lint`) with Ruff, and an all-inclusive task (`make all`). This automation streamlines the data analysis process and enhances code quality.
 
 ### Preperation
@@ -188,7 +188,7 @@ Step 6: [log of successful rust database operations](./rust_query_log.md)
 
 ### Result
 
-[Performance Comparison Report](./Performace_Comparison_Report_Rust_VS_Python.md) 
+[Performance Comparison Report](./Performance_Comparison_Report_Rust_VS_Python.md) 
 
 [The Python Time and Memory Usage File](./python_query_log.md)
 
